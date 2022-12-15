@@ -9,25 +9,30 @@ public class LeapYearGUI extends JFrame{
     private JTextField tfYear;
     private JButton btnCheckYear;
 
-    public LeapYearGUI(){
+    public LeapYearGUI() throws Exception{
         btnCheckYear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                computeLeapYear();
+                try {
+                    computeLeapYear();
+                }catch (Exception a){
+                    JOptionPane.showMessageDialog(panel1, "Enter a Year");
+                }
             }
         });
     }
 
     public void computeLeapYear(){
         int year = Integer.parseInt(tfYear.getText());
-        if((year%4 == 0 && year%100 != 0) || year%400 == 0){
-            JOptionPane.showMessageDialog(panel1, "Leap Year");
-        }else{
-            JOptionPane.showMessageDialog(panel1, "Not a Leap Year");
-        }
+
+            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                JOptionPane.showMessageDialog(panel1, "Leap Year");
+            } else {
+                JOptionPane.showMessageDialog(panel1, "Not a Leap Year");
+            }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         LeapYearGUI leapYear = new LeapYearGUI();
         leapYear.setContentPane(leapYear.panel1);
         leapYear.setSize(500,300);
