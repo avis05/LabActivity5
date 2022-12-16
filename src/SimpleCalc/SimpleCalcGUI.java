@@ -17,7 +17,7 @@ public class SimpleCalcGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                     compute();
-                }
+            }
         });
     }
     public static void main(String[] args) {
