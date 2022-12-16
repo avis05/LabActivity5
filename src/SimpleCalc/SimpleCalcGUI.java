@@ -12,15 +12,23 @@ public class SimpleCalcGUI extends JFrame{
     private JButton btnCompute;
     private JTextField tfNumber2;
     private JTextField lblResult;
-    public SimpleCalcGUI(){
+    public SimpleCalcGUI() throws Exception{
         btnCompute.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                try {
                     compute();
+
+                }catch (ArithmeticException a){
+                    JOptionPane.showMessageDialog(pnlCalculator, "Divisible by zero is illegal");
+                }catch (Exception a){
+                    JOptionPane.showMessageDialog(pnlCalculator, "Enter a Number");
+                }
             }
         });
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         SimpleCalcGUI cal = new SimpleCalcGUI();
         cal.setContentPane(cal.pnlCalculator);
         cal.setSize(550,300);
