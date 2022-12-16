@@ -17,11 +17,37 @@ public class FoodOrderGUI extends JFrame{
     private JRadioButton rb5;
     private JRadioButton rb10;
     private JRadioButton rb15;
-    public FoodOrderGUI(){
+    static class selectFoodException extends Exception {
+        public selectFoodException (){
+            super();
+        }
+    }
+    static class selectDiscountException extends Exception {
+        public selectDiscountException (){
+            super();
+        }
+    }
+    public FoodOrderGUI() throws Exception{
         btnOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                computeOrder();
+                try {
+                    if (!cPizza.isSelected() && !cBurger.isSelected() && !cFries.isSelected() &&
+                        !cSoftDrinks.isSelected() && !cTea.isSelected() && !cSundae.isSelected()){
+                        throw (new selectFoodException());
+                    }
+                    if (!rbNone.isSelected() && !rb5.isSelected() && !rb10.isSelected() && !rb15.isSelected()){
+                        throw (new selectDiscountException());
+                    }
+                        computeOrder();
+
+                }catch (selectFoodException a) {
+                    JOptionPane.showMessageDialog(pnlFoodOrder, "Please select your Food order");
+                }catch (selectDiscountException a){
+                    JOptionPane.showMessageDialog(pnlFoodOrder, "Please select your Discount");
+                }catch (Exception a){
+                    JOptionPane.showMessageDialog(pnlFoodOrder, "Select your order");
+                }
             }
         });
         rbNone.addActionListener(new ActionListener() {
@@ -65,7 +91,7 @@ public class FoodOrderGUI extends JFrame{
             }
         });
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         FoodOrderGUI foodOrder = new FoodOrderGUI();
         foodOrder.setContentPane(foodOrder.pnlFoodOrder);
         foodOrder.setSize(600,450);
@@ -75,7 +101,8 @@ public class FoodOrderGUI extends JFrame{
     }
 
     public void computeOrder(){
-        double total = 0, subTotal = 0;
+        double total = 0;
+        int subTotal = 0;
         String formattedValue;
 
         if(cPizza.isSelected()){
