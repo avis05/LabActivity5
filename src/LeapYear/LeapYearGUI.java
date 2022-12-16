@@ -21,7 +21,6 @@ public class LeapYearGUI extends JFrame{
             }
         });
     }
-
     public void computeLeapYear(){
         int year = Integer.parseInt(tfYear.getText());
 
@@ -31,7 +30,6 @@ public class LeapYearGUI extends JFrame{
                 JOptionPane.showMessageDialog(panel1, "Not a Leap Year");
             }
     }
-
     public static void main(String[] args) throws Exception {
         LeapYearGUI leapYear = new LeapYearGUI();
         leapYear.setContentPane(leapYear.panel1);
